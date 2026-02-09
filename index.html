@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Food Recipe App</title>
+  </head>
+  <body>
+    <div class="main-body">
+      <nav class="main-navheader">
+        <div><a href="./index.html">🏠 Home</a></div>
+        <div><a href="./index.html">About us</a></div>
+        <div><a href="./index.html">Projects</a></div>
+        <div><a href="./index.html">Contact us</a></div>
+      </nav>
+
+      <div class="main-heading">
+        <h1 id="heading1">🍲 Food Recipe App</h1>
+        <p>
+          A lightweight food recipe search app that lets users quickly find
+          delicious recipes with ease.
+        </p>
+        <br />
+
+        <div class="main-form">
+          <form
+            onsubmit="
+              fetchMeal();
+              return false;
+            "
+          >
+            <label for="user-meal">Food Name:</label>
+            <input
+              type="text"
+              name="user-meal"
+              id="user-meal"
+              placeholder="e.g. Burger"
+              required
+            />
+            <br />
+            <button id="submit-btn" type="submit">🔍 Search the Recipe</button>
+          </form>
+          <br />
+        </div>
+      </div>
+      <div id="theResult"></div>
+
+      <!-- JS Code -->
+      <script>
+        async function fetchMeal() {
+          try {
+            const userMealRef = document.querySelector("#user-meal").value;
+            const mealAPI = await fetch(
+              `https://www.themealdb.com/api/json/v1/1/search.php?s=${userMealRef}`,
+            );
+            const dataFromAPI = await mealAPI.json();
+            const mealFromAPI = dataFromAPI.meals;
+            console.log(mealFromAPI);
+
+            const resultRef = document.querySelector("#theResult");
+            resultRef.innerHTML = "";
+            mealFromAPI.map((ml) => {
+              resultRef.innerHTML =
+                resultRef.innerHTML +
+                `
+            <div class="meal-card">
+                <img src="${ml.strMealThumb}" class="meal-img" />
+                <h3>#️⃣ <u>${ml.strMeal}</u></h3>
+                <h5>📍 Area:  ${ml.strArea}</h5>
+                <p><b>Ingredients: </b></p>
+                <ul>
+                  <li>${ml.strIngredient1}</li>
+                  <li>${ml.strIngredient2}</li>
+                  <li>${ml.strIngredient3}</li>
+                  <li>${ml.strIngredient4}</li>
+                  <li>${ml.strIngredient5}</li>
+                  <li>${ml.strIngredient6}</li>
+                  </ul>
+                  <a href="${ml.strYoutube}" target="_blank">📺  Watch a Video.</a>
+            </div>
+            `;
+            });
+          } catch (err) {
+            alert("oo, Something went wrong", err);
+          }
+        }
+      </script>
+    </div>
+  </body>
+</html>
