@@ -16,6 +16,9 @@ body {
   border: 2px solid rgb(220, 250, 187);
   border-radius: 30px;
   margin: 5px;
+
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .main-heading {
@@ -31,9 +34,14 @@ body {
 
 #heading1 {
   text-decoration: underline;
+  font-family: "Gravitas One", serif;
+  font-weight: 200px;
   color: brown;
 }
 
+#main-para {
+  font-family: "Playwrite NZ Basic", cursive;
+}
 .main-form {
   font-size: 18px;
   text-align: center;
@@ -105,4 +113,24 @@ body {
   gap: 25px;
   justify-content: center;
   margin-top: 20px;
+}
+
+.social-icons {
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-icons img {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(2.1);
 }
